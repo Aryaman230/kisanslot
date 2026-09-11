@@ -66,7 +66,7 @@ export const HaltOperationsModal: React.FC<HaltOperationsModalProps> = ({
           <div className="p-6 space-y-4 text-xs text-slate-700">
             <div className="bg-red-50 p-3.5 rounded-xl border border-red-200 text-red-900">
               <p className="font-semibold text-xs leading-relaxed">
-                <strong>CRITICAL WARNING:</strong> Activating this emergency protocol will immediately freeze gate RFID barriers, suspend automated weighbridge weighing, and hold 184 registered incoming vehicles at perimeter buffers.
+                <strong>CRITICAL WARNING:</strong> Activating this emergency protocol will immediately freeze gate Entry barriers, suspend automated weighbridge weighing, and hold 184 registered incoming vehicles at perimeter buffers.
               </p>
             </div>
 

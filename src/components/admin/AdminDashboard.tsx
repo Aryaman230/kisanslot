@@ -287,7 +287,7 @@ export const AdminDashboard = ({
                     MANDI OPERATIONS CURRENTLY HALTED
                   </h4>
                   <p className="text-xs text-red-100">
-                    Incoming gates RFID barriers closed. Buffer holding instructions broadcasted to 184 registered farmers.
+                    Incoming gates Entry barriers closed. Buffer holding instructions broadcasted to 184 registered farmers.
                   </p>
                 </div>
               </div>
@@ -486,8 +486,8 @@ export const AdminDashboard = ({
             </div>
             <div className="space-y-2.5">
               <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 leading-relaxed">
-                <div className="flex items-center justify-between text-[10px] text-slate-400 mb-0.5 font-mono"><span>08:14 AM</span><span className="text-emerald-700 font-bold">RFID Verified</span></div>
-                Token <strong>A127 (Ramesh Yadav)</strong> cleared RFID Gate 02 weighbridge.
+                <div className="flex items-center justify-between text-[10px] text-slate-400 mb-0.5 font-mono"><span>08:14 AM</span><span className="text-emerald-700 font-bold">Aadhar Verified</span></div>
+                Token <strong>A127 (Ramesh Yadav)</strong> cleared Aadhar Gate 02 weighbridge.
               </div>
               <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 leading-relaxed">
                 <div className="flex items-center justify-between text-[10px] text-slate-400 mb-0.5 font-mono"><span>07:42 AM</span><span className="text-emerald-700 font-bold">DBT Cleared</span></div>

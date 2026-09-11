@@ -36,7 +36,7 @@ export function getVehicleEstimate(yieldQtl: number): VehicleEstimate {
       capacityRange: '21 - 50 Quintals (Up to 5.0 MT)',
       recommendedTonnage: '3.0 - 5.0 Tonne Payload',
       imageHint: 'truck-medium',
-      description: 'Standard Mandi workhorse. Fast electronic RFID gate entry at Gate 02.'
+      description: 'Standard Mandi workhorse. Fast electronic Entry gate entry at Gate 02.'
     };
   } else if (yieldQtl <= 100) {
     return {
@@ -73,7 +73,7 @@ export const INITIAL_FARMERS_TABLE: FarmerRecord[] = [
     assignedGate: 'Gate 02',
     status: 'Quality Checking',
     slotTime: '08:30 AM - 10:00 AM',
-    gateEntryTime: '08:14 AM (RFID Verified)',
+    gateEntryTime: '08:14 AM (Aadhar Verified)',
     moisturePercent: 11.8,
     purityPercent: 99.2,
     dbtAmount: 102375,

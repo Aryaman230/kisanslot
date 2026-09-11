@@ -110,7 +110,7 @@ export const LiveTrackerView = ({
             </div>
           </div>
           <span className="text-[11px] font-mono font-bold bg-blue-950/70 text-amber-300 border border-amber-400/40 px-2 py-0.5 rounded">
-            RFID VERIFIED
+            Aadhar VERIFIED
           </span>
         </div>
 
@@ -365,7 +365,7 @@ export const LiveTrackerView = ({
                 </span>
               </div>
               <p className="text-[11px] text-slate-600">
-                RFID scanned at Gate 02. Gross vehicle weighbridge weight recorded: 3,420 kg.
+                Aadhar scanned at Gate 02. Gross vehicle weighbridge weight recorded: 3,420 kg.
               </p>
             </div>
           </div>
