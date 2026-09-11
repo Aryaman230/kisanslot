@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Merriweather", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-royal-blue: #2563EB;
+  --color-royal-blue-hover: #1D4ED8;
+  --color-royal-blue-dark: #1E3A8A;
+  --color-soft-blue: #DBEAFE;
+  --color-soft-blue-subtle: #EFF6FF;
+  --color-sun-amber: #F59E0B;
+  --color-sun-amber-light: #FEF3C7;
+  --color-dark-slate: #0F172A;
+  --color-ice-white: #F8FAFC;
+}
+
+@layer utilities {
+  .font-serif-gov {
+    font-family: 'Merriweather', Georgia, Cambria, serif;
+  }
+  .font-sans-ui {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+/* Sunlight high-contrast outdoor readability support */
+.sunlight-high-contrast {
+  --tw-contrast: contrast(115%);
+  filter: contrast(110%);
+}
+
+/* Custom scrollbar for institutional dashboard */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "KisanSlot",
+  "description": "Smart agricultural logistics platform for Smart India Hackathon featuring Farmer Mobile PWA & Mandi Admin Command Center.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
