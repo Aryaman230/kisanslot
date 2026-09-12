@@ -32,7 +32,7 @@ import {
   X
 } from 'lucide-react';
 import { FarmerRecord, MandiKpiData, QueueStatus } from '../../types';
-import { IcarSoilChart } from './IcarSoilChart';
+import { LiveMarketPrices } from './LiveMarketPrices';
 import { HaltOperationsModal } from './HaltOperationsModal';
 
 interface AdminDashboardProps {
@@ -56,7 +56,7 @@ interface FirebaseSlotData {
   assignedGate?: string;
   slotTime?: string;
   status?: QueueStatus;
-  icarSoilZone?: string;
+  icarSoilZone?: string; // Keeping property name for TS type safety, but removing ICAR from UI
   vehicleNumber?: string;
   vehicleType?: string;
   moisturePercent?: number;
@@ -107,7 +107,7 @@ export const AdminDashboard = ({
           assignedGate: data.assignedGate || 'Gate 02',
           slotTime: data.slotTime || '08:30 AM - 10:00 AM',
           status: data.status || 'Scheduled',
-          icarSoilZone: data.icarSoilZone || 'Gangetic Alluvial Tract',
+          icarSoilZone: data.icarSoilZone || 'North Bihar Plains', // Removed ICAR reference
           vehicleNumber: data.vehicleNumber || 'BR-06-G-4921',
           vehicleType: data.vehicleType || 'Medium Pickup (Bolero)',
           moisturePercent: data.moisturePercent || 11.8,
@@ -185,7 +185,8 @@ export const AdminDashboard = ({
     }
   };
 
-  const dashboardKpis = {
+  // Fixed the Type error by adding : MandiKpiData
+  const dashboardKpis: MandiKpiData = {
     totalLoadQtl: 8420,
     activeFarmers: 184,
     avgWaitTimeMins: 22,
@@ -413,7 +414,8 @@ export const AdminDashboard = ({
                   <tr>
                     <th className="py-3 px-4">Token</th>
                     <th className="py-3 px-4">Farmer Name</th>
-                    <th className="py-3 px-4">Crop & ICAR Soil Zone</th>
+                    {/* Changed Table Header from ICAR to Region */}
+                    <th className="py-3 px-4">Crop & Region</th>
                     <th className="py-3 px-4">Est. Yield</th>
                     <th className="py-3 px-4">Gate & Vehicle</th>
                     <th className="py-3 px-4">Status</th>
@@ -478,7 +480,8 @@ export const AdminDashboard = ({
         </div>
 
         <div className="space-y-4">
-          <IcarSoilChart />
+          {/* REPLACED THE ICAR TAG WITH LIVE MARKET PRICES */}
+          <LiveMarketPrices />
           <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs text-xs space-y-3">
             <div className="flex items-center justify-between border-b border-slate-100 pb-2">
               <h4 className="font-serif-gov font-bold text-slate-900 flex items-center gap-1.5"><AlertTriangle className="w-4 h-4 text-amber-500" /> Command Dispatch Logs</h4>
@@ -486,8 +489,8 @@ export const AdminDashboard = ({
             </div>
             <div className="space-y-2.5">
               <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 leading-relaxed">
-                <div className="flex items-center justify-between text-[10px] text-slate-400 mb-0.5 font-mono"><span>08:14 AM</span><span className="text-emerald-700 font-bold">Aadhar Verified</span></div>
-                Token <strong>A127 (Ramesh Yadav)</strong> cleared Aadhar Gate 02 weighbridge.
+                <div className="flex items-center justify-between text-[10px] text-slate-400 mb-0.5 font-mono"><span>08:14 AM</span><span className="text-emerald-700 font-bold">Aadhaar Verified</span></div>
+                Token <strong>A127 (Ramesh Yadav)</strong> cleared Aadhaar Gate 02 weighbridge.
               </div>
               <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-slate-700 leading-relaxed">
                 <div className="flex items-center justify-between text-[10px] text-slate-400 mb-0.5 font-mono"><span>07:42 AM</span><span className="text-emerald-700 font-bold">DBT Cleared</span></div>
