@@ -407,9 +407,11 @@ export const AdminDashboard = ({
               </div>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[10px] font-bold">
+            {/* Naya Scrollable Wrapper */}
+            <div className="overflow-auto max-h-[540px] custom-scrollbar border-b border-slate-200">
+              <table className="w-full text-left text-xs relative">
+                {/* Sticky Header */}
+                <thead className="bg-slate-50 text-slate-500 uppercase tracking-wider text-[10px] font-bold sticky top-0 z-10 shadow-sm outline outline-1 outline-slate-200">
                   <tr>
                     <th className="py-3 px-4">Token</th>
                     <th className="py-3 px-4">Farmer Name</th>
