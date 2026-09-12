@@ -137,47 +137,37 @@ export const LiveTrackerView = ({
               <div className="w-24 h-24 bg-white p-1 rounded-lg border border-slate-300 flex items-center justify-center relative shadow-inner">
                 {/* SVG QR Code Simulation */}
                 <svg viewBox="0 0 100 100" className="w-full h-full text-slate-900 fill-current">
-                  {/* Outer corner anchors */}
                   <rect x="5" y="5" width="26" height="26" rx="3" fill="#0F172A" />
                   <rect x="9" y="9" width="18" height="18" rx="2" fill="white" />
                   <rect x="13" y="13" width="10" height="10" rx="1" fill="#2563EB" />
-
                   <rect x="69" y="5" width="26" height="26" rx="3" fill="#0F172A" />
                   <rect x="73" y="9" width="18" height="18" rx="2" fill="white" />
                   <rect x="77" y="13" width="10" height="10" rx="1" fill="#2563EB" />
-
                   <rect x="5" y="69" width="26" height="26" rx="3" fill="#0F172A" />
                   <rect x="9" y="73" width="18" height="18" rx="2" fill="white" />
                   <rect x="13" y="77" width="10" height="10" rx="1" fill="#2563EB" />
-
-                  {/* QR Data Pattern elements */}
                   <rect x="36" y="8" width="6" height="6" fill="#0F172A" />
                   <rect x="46" y="8" width="6" height="6" fill="#2563EB" />
                   <rect x="56" y="8" width="6" height="6" fill="#0F172A" />
-
                   <rect x="36" y="20" width="6" height="6" fill="#0F172A" />
                   <rect x="46" y="24" width="6" height="6" fill="#0F172A" />
                   <rect x="56" y="18" width="6" height="6" fill="#2563EB" />
-
                   <rect x="12" y="38" width="8" height="8" fill="#0F172A" />
                   <rect x="26" y="42" width="6" height="6" fill="#2563EB" />
                   <rect x="36" y="36" width="10" height="6" fill="#0F172A" />
                   <rect x="52" y="38" width="8" height="8" fill="#0F172A" />
                   <rect x="66" y="36" width="6" height="10" fill="#2563EB" />
                   <rect x="78" y="40" width="8" height="6" fill="#0F172A" />
-
                   <rect x="10" y="52" width="6" height="8" fill="#2563EB" />
                   <rect x="22" y="56" width="8" height="6" fill="#0F172A" />
                   <rect x="36" y="50" width="12" height="6" fill="#0F172A" />
                   <rect x="54" y="54" width="6" height="8" fill="#2563EB" />
                   <rect x="68" y="52" width="10" height="6" fill="#0F172A" />
                   <rect x="84" y="52" width="6" height="10" fill="#0F172A" />
-
                   <rect x="36" y="68" width="6" height="8" fill="#2563EB" />
                   <rect x="48" y="72" width="10" height="6" fill="#0F172A" />
                   <rect x="64" y="68" width="8" height="8" fill="#2563EB" />
                   <rect x="78" y="74" width="8" height="6" fill="#0F172A" />
-
                   <rect x="36" y="82" width="10" height="6" fill="#0F172A" />
                   <rect x="52" y="84" width="8" height="6" fill="#2563EB" />
                   <rect x="68" y="82" width="6" height="8" fill="#0F172A" />
@@ -232,7 +222,6 @@ export const LiveTrackerView = ({
 
       {/* 2. CRUCIAL: LIVE QUEUE VISUALIZATION */}
       <div className="bg-linear-to-b from-slate-900 to-[#0F172A] text-white rounded-2xl p-4 shadow-lg border border-slate-700 relative overflow-hidden">
-        {/* Subtle decorative glowing corner */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
         <div className="flex items-center justify-between mb-3">
@@ -247,7 +236,6 @@ export const LiveTrackerView = ({
           </span>
         </div>
 
-        {/* The Exact Queue Sequence Specified: Currently Serving: A119 -> Up Next: A120 -> Your Token: A127 */}
         <div className="bg-slate-800/80 rounded-xl p-3.5 border border-slate-700">
           <div className="grid grid-cols-3 gap-2 items-center text-center">
             {/* 1. Currently Serving */}
@@ -285,7 +273,7 @@ export const LiveTrackerView = ({
             </div>
           </div>
 
-          {/* Large Highlighted 'Your Token: A127' Section */}
+          {/* Large Highlighted 'Your Token' Section */}
           <div className="mt-3 pt-3 border-t border-slate-700/80 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center font-serif text-white font-bold text-xs shadow-xs">
@@ -301,13 +289,27 @@ export const LiveTrackerView = ({
               </div>
             </div>
 
+            {/* ---> MAGIC HAPPENS HERE: Dynamic Queue Logic <--- */}
             <div className="text-right">
-              <span className="text-xs font-bold text-emerald-400 block">
-                ~7 Vehicles Ahead
-              </span>
-              <span className="text-[10px] text-slate-300">
-                Est. Wait: 18 - 22 mins
-              </span>
+              {(() => {
+                const currentTokenNum = parseInt(queueServingToken.replace(/\D/g, '')) || 0;
+                const myTokenNum = parseInt(farmerData.token.replace(/\D/g, '')) || 0;
+                const aheadCount = Math.max(0, myTokenNum - currentTokenNum - 1);
+                
+                const minWait = Math.floor(aheadCount * 2.5);
+                const maxWait = Math.ceil(aheadCount * 3.1);
+
+                return (
+                  <>
+                    <span className="text-xs font-bold text-emerald-400 block">
+                      {aheadCount > 0 ? `~${aheadCount} Vehicles Ahead` : 'Your Turn Next!'}
+                    </span>
+                    <span className="text-[10px] text-slate-300">
+                      {aheadCount > 0 ? `Est. Wait: ${minWait} - ${maxWait} mins` : 'Please approach dock'}
+                    </span>
+                  </>
+                );
+              })()}
             </div>
           </div>
         </div>
@@ -348,9 +350,8 @@ export const LiveTrackerView = ({
           <ShieldCheck className="w-5 h-5 text-blue-600" />
         </div>
 
-        {/* Vertical Stepper Elements */}
         <div className="space-y-6 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
-          {/* STEP 1: Gate Entry Completed (Green Check) */}
+          {/* STEP 1: Gate Entry Completed */}
           <div className="relative flex items-start gap-4">
             <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0 z-10 shadow-sm">
               <CheckCircle2 className="w-5 h-5" />
@@ -370,7 +371,7 @@ export const LiveTrackerView = ({
             </div>
           </div>
 
-          {/* STEP 2: e-NAM Quality Check (Pending / Pulsing Amber) */}
+          {/* STEP 2: e-NAM Quality Check */}
           <div className="relative flex items-start gap-4">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 z-10 shadow-sm transition-all ${
@@ -430,7 +431,7 @@ export const LiveTrackerView = ({
             </div>
           </div>
 
-          {/* STEP 3: Direct Bank Transfer (Pending / Gray) */}
+          {/* STEP 3: Direct Bank Transfer (DBT) */}
           <div className="relative flex items-start gap-4">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 z-10 shadow-sm transition-all ${
