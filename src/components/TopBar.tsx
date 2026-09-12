@@ -63,7 +63,7 @@ export const TopBar = ({
                   KisanSlot
                 </span>
                 <span className="text-[10px] uppercase font-bold tracking-wider bg-blue-500/30 text-blue-200 border border-blue-400/30 px-1.5 py-0.5 rounded">
-                  SIH 2024
+                  SIH 2026
                 </span>
               </div>
               <p className="text-[10px] text-slate-400 hidden sm:block">
