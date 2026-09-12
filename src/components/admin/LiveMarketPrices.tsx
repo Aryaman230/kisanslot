@@ -2,6 +2,7 @@
 // Suppress the resulting generated JSX import diagnostic for this component.
 // @ts-nocheck
 import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
+import { LiveMarketPrices } from './LiveMarketPrices';
 
 export const LiveMarketPrices = () => {
   // 9 Major APMC Crops with 2026-27 simulated data
