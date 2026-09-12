@@ -95,30 +95,34 @@ export const AdminDashboard = ({
     const q = query(collection(db, "slots"), orderBy("createdAt", "desc"));
     
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const cloudSlots: FarmerRecord[] = snapshot.docs.map((doc): FarmerRecord => {
+      // 'index' add kiya taaki har row alag dikhe
+      const cloudSlots: FarmerRecord[] = snapshot.docs.map((doc, index): FarmerRecord => {
         const data = doc.data() as FirebaseSlotData;
+        
+        // Smart Fallbacks taaki Clone Army na bane
+        const dummyNames = ['Ramesh Yadav', 'Suresh Kumar', 'Kisan Lal', 'Amit Singh', 'Rajendra Prasad', 'Mukesh Chaupal'];
+        const dummyCrops = ['Wheat (Sharbati)', 'Mustard (Pusa Bold)', 'Gram / Chana', 'Paddy / Rice'];
+
         return {
-          token: data.token || 'A127',
-          farmerName: data.farmerName || 'Ramesh Yadav',
-          farmerNameHi: data.farmerNameHi || 'रमेश यादव',
-          phone: data.phone || '9876543210',
-          crop: data.crop || 'Wheat (Sharbati)',
-          yieldQtl: data.yieldQtl || 45,
-          assignedGate: data.assignedGate || 'Gate 02',
+          token: data.token || `A${127 + index}`, // A127, A128, A129 banta jayega
+          farmerName: data.farmerName || dummyNames[index % dummyNames.length], // Alag-alag naam
+          farmerNameHi: data.farmerNameHi || '',
+          phone: data.phone || `98765${40000 + index}`,
+          crop: data.crop || dummyCrops[index % dummyCrops.length], // Alag-alag fasalein
+          yieldQtl: data.yieldQtl || (45 + (index * 3)), // Alag-alag weight
+          assignedGate: data.assignedGate || (index % 2 === 0 ? 'Gate 02' : 'Gate 01'), // Gate 1 aur 2 mein divide
           slotTime: data.slotTime || '08:30 AM - 10:00 AM',
           status: data.status || 'Scheduled',
-          icarSoilZone: data.icarSoilZone || 'North Bihar Plains', // Removed ICAR reference
-          vehicleNumber: data.vehicleNumber || 'BR-06-G-4921',
-          vehicleType: data.vehicleType || 'Medium Pickup (Bolero)',
+          icarSoilZone: data.icarSoilZone || 'North Bihar Plains',
+          vehicleNumber: data.vehicleNumber || `BR-06-G-${4921 + index}`,
+          vehicleType: data.vehicleType || 'Medium Pickup',
           moisturePercent: data.moisturePercent || 11.8,
           purityPercent: data.purityPercent || 99.2,
-          dbtAmount: data.dbtAmount || 102375,
+          dbtAmount: data.dbtAmount || (102375 + (index * 1500)),
         };
       });
 
-      if (cloudSlots.length > 0) {
-        setLiveSlots(cloudSlots);
-      }
+      setLiveSlots(cloudSlots);
     }, (error) => {
       console.error("Error fetching live slots from Firebase: ", error);
     });
