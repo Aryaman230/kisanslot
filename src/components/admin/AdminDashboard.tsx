@@ -31,7 +31,7 @@ import {
   Bell,
   X
 } from 'lucide-react';
-import { FarmerRecord, MandiKpiData, QueueStatus } from '../../types';
+import { FarmerRecord, QueueStatus } from '../../types';
 import { LiveMarketPrices } from './LiveMarketPrices';
 import { HaltOperationsModal } from './HaltOperationsModal';
 
@@ -185,8 +185,7 @@ export const AdminDashboard = ({
     }
   };
 
-  // Fixed the Type error by adding : MandiKpiData
-  const dashboardKpis: MandiKpiData = {
+  const dashboardKpis = {
     totalLoadQtl: 8420,
     activeFarmers: 184,
     avgWaitTimeMins: 22,
